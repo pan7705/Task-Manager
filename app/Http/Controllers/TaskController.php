@@ -10,7 +10,7 @@ class TaskController extends Controller
     public function index()
     {
         // Ambik semua data dari table Task
-        $task = Task::all();
+        $tasks = Task::all();
 
         //Hantar data ke view
         return view('task.index', compact('tasks'));
