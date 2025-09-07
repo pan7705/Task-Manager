@@ -11,4 +11,4 @@ use App\Http\Controllers\CategoryController;
 Route::get('/',[TaskController::class, 'index'])->name('task.index');
 
 Route::resource('task', TaskController::class);
-Route::resource('categories', CategoryController::class);
+Route::resource('category', CategoryController::class);
