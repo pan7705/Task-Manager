@@ -18,8 +18,9 @@
     @endif
 
     {{-- Button tambah task --}}
-    <div class="mb-3">
+    <div class="mb-3 d-flex gap-2">
         <a href="{{ route('task.create') }}" class="btn btn-primary">+ Add New Task</a>
+        <a href="{{ route('category.index') }}" class="btn btn-secondary">Manage Categories</a>
     </div>
 
     <div class="card shadow-sm">

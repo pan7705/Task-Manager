@@ -14,4 +14,10 @@ class Task extends Model
         'due_date',
         'status',
     ];
+
+    //table relationship
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
