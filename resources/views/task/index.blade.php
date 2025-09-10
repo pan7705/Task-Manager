@@ -33,6 +33,8 @@
                         <th>Title</th>
                         <th>Due Date</th>
                         <th>Status</th>
+                        <th>Category</th>
+                        <th>Project</th>
                         <th width="200px">Action</th>
                     </tr>
                 </thead>
@@ -49,6 +51,8 @@
                                     <span class="badge bg-warning text-dark">Pending</span>
                                 @endif
                             </td>
+                            <td>{{ $task->category->name ?? '-' }}</td> {{-- Object Relational Mapping (ORM) --}}
+                            <td>{{ $task->project->name ?? '-' }}</td> {{-- Object Relational Mapping (ORM) --}}
                             <td>
                                 <a href="{{ route('task.show', $task->id) }}" class="btn btn-sm btn-info text-white">View</a>
                                 <a href="{{ route('task.edit', $task->id) }}" class="btn btn-sm btn-warning">Edit</a>
