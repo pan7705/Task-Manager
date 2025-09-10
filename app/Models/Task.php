@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Project;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -19,5 +21,10 @@ class Task extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 }
