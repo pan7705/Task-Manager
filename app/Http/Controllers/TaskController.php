@@ -34,6 +34,7 @@ class TaskController extends Controller
             "due_date" => "nullable|date",
             "status" => "required|boolean",
             "category_id" => "nullable|exists:categories,id",
+            "project_id" => "nullable|exists:projects,id",
         ]);
 
         // Simpan data ke database
@@ -43,6 +44,7 @@ class TaskController extends Controller
             "due_date" => $request->due_date,
             "status" => $request->status,
             "category_id" => $request->category_id,
+            "project_id" => $request->project_id,
         ]);
 
         return redirect()->route('task.index')->with('success', 'Task created successfully.');
@@ -56,7 +58,8 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $categories = Category::all();
-        return view('task.edit', compact('task', 'categories'));
+        $projects = Project::all();
+        return view('task.edit', compact('task', 'categories', 'projects'));
     }
 
     public function update(Request $request, Task $task)
@@ -68,6 +71,7 @@ class TaskController extends Controller
             "due_date" => "nullable|date",
             "status" => "required|boolean",
             "category_id" => "nullable|exists:categories,id",
+            "project_id" => "nullable|exists:projects,id",
         ]);
 
         // Update data ke database
@@ -77,6 +81,7 @@ class TaskController extends Controller
             "due_date" => $request->due_date,
             "status" => $request->status,
             "category_id" => $request->category_id,
+            "project_id" => $request->project_id,
         ]);
 
         return redirect()->route('task.index')->with('success', 'Task updated successfully.');
