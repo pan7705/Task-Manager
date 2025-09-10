@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Project;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ class TaskController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('task.create', compact('categories'));
+        $projects = Project::all();
+        return view('task.create', compact('categories', 'projects'));
     }
 
     public function store(Request $request)

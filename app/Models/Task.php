@@ -16,6 +16,7 @@ class Task extends Model
         'due_date',
         'status',
         'category_id',
+        'project_id',
     ];
 
     //table relationship
