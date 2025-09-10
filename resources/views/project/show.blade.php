@@ -19,13 +19,13 @@
             <p>{{ $project->description ?? '-' }}</p>
 
             <div class="d-flex gap-2 mt-3">
-                <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-warning">Edit</a>
-                <form action="{{ route('projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                <a href="{{ route('project.edit', $project->id) }}" class="btn btn-warning">Edit</a>
+                <form action="{{ route('project.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-                <a href="{{ route('projects.index') }}" class="btn btn-secondary">Back</a>
+                <a href="{{ route('project.index') }}" class="btn btn-secondary">Back</a>
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <form action="{{ route('projects.update', $project->id) }}" method="POST">
+            <form action="{{ route('project.update', $project->id) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -42,7 +42,7 @@
 
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-success">Update</button>
-                    <a href="{{ route('projects.index') }}" class="btn btn-secondary">Back</a>
+                    <a href="{{ route('project.index') }}" class="btn btn-secondary">Back</a>
                 </div>
             </form>
         </div>

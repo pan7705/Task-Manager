@@ -19,7 +19,7 @@
 
     {{-- Buttons --}}
     <div class="mb-3 d-flex gap-2">
-        <a href="{{ route('projects.create') }}" class="btn btn-primary">+ Add New Project</a>
+        <a href="{{ route('project.create') }}" class="btn btn-primary">+ Add New Project</a>
         <a href="{{ route('task.index') }}" class="btn btn-secondary">Back to Tasks</a>
     </div>
 
@@ -41,9 +41,9 @@
                             <td>{{ $project->name }}</td>
                             <td>{{ $project->description ?? '-' }}</td>
                             <td>
-                                <a href="{{ route('projects.show', $project->id) }}" class="btn btn-sm btn-info text-white">View</a>
-                                <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                <form action="{{ route('projects.destroy', $project->id) }}" method="POST" class="d-inline">
+                                <a href="{{ route('project.show', $project->id) }}" class="btn btn-sm btn-info text-white">View</a>
+                                <a href="{{ route('project.edit', $project->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="{{ route('project.destroy', $project->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">
