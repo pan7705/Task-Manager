@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Project;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -13,5 +15,18 @@ class Task extends Model
         'description',
         'due_date',
         'status',
+        'category_id',
+        'project_id',
     ];
+
+    //table relationship
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }
