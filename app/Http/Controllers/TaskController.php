@@ -33,6 +33,7 @@ class TaskController extends Controller
             "description" => "nullable|string",
             "due_date" => "nullable|date",
             "status" => "required|boolean",
+            "category_id" => "nullable|exists:categories,id",
         ]);
 
         // Simpan data ke database
@@ -41,6 +42,7 @@ class TaskController extends Controller
             "description" => $request->description,
             "due_date" => $request->due_date,
             "status" => $request->status,
+            "category_id" => $request->category_id,
         ]);
 
         return redirect()->route('task.index')->with('success', 'Task created successfully.');
@@ -53,7 +55,8 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        return view('task.edit', compact('task'));
+        $categories = Category::all();
+        return view('task.edit', compact('task', 'categories'));
     }
 
     public function update(Request $request, Task $task)
@@ -64,6 +67,7 @@ class TaskController extends Controller
             "description" => "nullable|string",
             "due_date" => "nullable|date",
             "status" => "required|boolean",
+            "category_id" => "nullable|exists:categories,id",
         ]);
 
         // Update data ke database
@@ -72,6 +76,7 @@ class TaskController extends Controller
             "description" => $request->description,
             "due_date" => $request->due_date,
             "status" => $request->status,
+            "category_id" => $request->category_id,
         ]);
 
         return redirect()->route('task.index')->with('success', 'Task updated successfully.');

@@ -32,6 +32,7 @@
                         <th>No</th>
                         <th>Title</th>
                         <th>Due Date</th>
+                        <th>Category</th>
                         <th>Status</th>
                         <th>Category</th>
                         <th>Project</th>
@@ -44,6 +45,7 @@
                             <td>{{ $task->id }}</td>
                             <td>{{ $task->title }}</td>
                             <td>{{ $task->due_date ?? '-' }}</td>
+                            <td>{{ $task->category->name ?? '-' }}</td>
                             <td>
                                 @if($task->status)
                                     <span class="badge bg-success">Completed</span>
