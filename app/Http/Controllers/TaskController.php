@@ -11,8 +11,11 @@ class TaskController extends Controller
 {
     public function index()
     {
-        // Ambik semua data dari table Task
-        $tasks = Task::all();
+        // Ambik semua data dari table Task (ni kalau system cuma ada 1 user je)
+        // $tasks = Task::all();
+
+        // ni kalau system ada multiple user
+        $tasks = auth()->user()->tasks;
 
         //Hantar data ke view
         return view('task.index', compact('tasks'));
@@ -34,15 +37,18 @@ class TaskController extends Controller
             "due_date" => "nullable|date",
             "status" => "required|boolean",
             "category_id" => "nullable|exists:categories,id",
+            "project_id" => "nullable|exists:projects,id",
         ]);
 
         // Simpan data ke database
         Task::create([
+            "user_id" => auth()->id(),
             "title" => $request->title,
             "description" => $request->description,
             "due_date" => $request->due_date,
             "status" => $request->status,
             "category_id" => $request->category_id,
+            "project_id" => $request->project_id,
         ]);
 
         return redirect()->route('task.index')->with('success', 'Task created successfully.');
@@ -55,12 +61,17 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
+        $this->authorize('update', $task); // Authorize using the policy
+
         $categories = Category::all();
-        return view('task.edit', compact('task', 'categories'));
+        $projects = Project::all();
+        return view('task.edit', compact('task', 'categories', 'projects'));
     }
 
     public function update(Request $request, Task $task)
     {
+        $this->authorize('update', $task);
+
         // validate data dulu sebelum simpan
         $request->validate([
             "title" => "required|string|max:255",
@@ -68,6 +79,7 @@ class TaskController extends Controller
             "due_date" => "nullable|date",
             "status" => "required|boolean",
             "category_id" => "nullable|exists:categories,id",
+            "project_id" => "nullable|exists:projects,id",
         ]);
 
         // Update data ke database
@@ -77,6 +89,7 @@ class TaskController extends Controller
             "due_date" => $request->due_date,
             "status" => $request->status,
             "category_id" => $request->category_id,
+            "project_id" => $request->project_id,
         ]);
 
         return redirect()->route('task.index')->with('success', 'Task updated successfully.');
@@ -84,6 +97,8 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+        $this->authorize('delete', $task);
+
         $task->delete();
         return redirect()->route('task.index')->with('success', 'Task deleted successfully.');
     }
