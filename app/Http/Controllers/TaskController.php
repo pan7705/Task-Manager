@@ -11,8 +11,11 @@ class TaskController extends Controller
 {
     public function index()
     {
-        // Ambik semua data dari table Task
-        $tasks = Task::all();
+        // Ambik semua data dari table Task (ni kalau system cuma ada 1 user je)
+        // $tasks = Task::all();
+
+        // ni kalau system ada multiple user
+        $tasks = auth()->user()->tasks;
 
         //Hantar data ke view
         return view('task.index', compact('tasks'));
@@ -39,6 +42,7 @@ class TaskController extends Controller
 
         // Simpan data ke database
         Task::create([
+            "user_id" => auth()->id(),
             "title" => $request->title,
             "description" => $request->description,
             "due_date" => $request->due_date,
@@ -93,7 +97,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        $this->authorize('delete', $task); 
+        $this->authorize('delete', $task);
 
         $task->delete();
         return redirect()->route('task.index')->with('success', 'Task deleted successfully.');
