@@ -57,6 +57,8 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
+        $this->authorize('update', $task); // Authorize using the policy
+
         $categories = Category::all();
         $projects = Project::all();
         return view('task.edit', compact('task', 'categories', 'projects'));
@@ -64,6 +66,8 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
+        $this->authorize('update', $task);
+
         // validate data dulu sebelum simpan
         $request->validate([
             "title" => "required|string|max:255",
@@ -89,6 +93,8 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+        $this->authorize('delete', $task); 
+
         $task->delete();
         return redirect()->route('task.index')->with('success', 'Task deleted successfully.');
     }

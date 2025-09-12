@@ -55,7 +55,9 @@
                             <td>{{ $task->project->name ?? '-' }}</td> {{-- Object Relational Mapping (ORM) --}}
                             <td>
                                 <a href="{{ route('task.show', $task->id) }}" class="btn btn-sm btn-info text-white">View</a>
+                                @can('update', $task)
                                 <a href="{{ route('task.edit', $task->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                @endcan
                                 <form action="{{ route('task.destroy', $task->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
