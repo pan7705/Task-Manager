@@ -28,7 +28,7 @@ class TaskController extends Controller
 
         $categories = Category::where('user_id', auth()->id())->get();
         $projects = Project::where('user_id', auth()->id())->get();
-        
+
         return view('task.create', compact('categories', 'projects'));
     }
 
@@ -46,7 +46,7 @@ class TaskController extends Controller
 
         // Simpan data ke database
         Task::create([
-            "user_id" => auth()->id(),
+            // "user_id" => auth()->id(), (dah buat kat observer)
             "title" => $request->title,
             "description" => $request->description,
             "due_date" => $request->due_date,

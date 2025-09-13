@@ -29,9 +29,9 @@ class ProjectController extends Controller
 
         // Simpan data ke database
         Project::create([
+            // "user_id" => auth()->id(), (dah buat kat observer)
             "name" => $request->name,
             "description" => $request->description,
-            "user_id" => auth()->id(),
         ]);
 
         return redirect()->route('project.index')->with('success', 'Project created successfully.');

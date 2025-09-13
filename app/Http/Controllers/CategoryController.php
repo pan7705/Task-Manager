@@ -26,8 +26,8 @@ class CategoryController extends Controller
         ]);
 
         Category::create([
+            // 'user_id' => auth()->id(), (Dah buat kat observer)
             'name' => $request->name,
-            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('category.index')->with('success', 'Category created successfully.');
