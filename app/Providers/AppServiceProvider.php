@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
+use App\Models\Project;
+use App\Models\Category;
 use App\Observers\TaskObserver;
 use App\Observers\ProjectObserver;
 use App\Observers\CategoryObserver;
