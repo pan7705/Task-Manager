@@ -16,6 +16,7 @@
             <p class="card-text"><strong>Description:</strong> {{ $task->description ?? '-' }}</p>
             <p class="card-text"><strong>Due Date:</strong> {{ $task->due_date ?? '-' }}</p>
             <p class="card-text"><strong>Category:</strong> {{ $task->category->name ?? '-' }}</p>
+            <p class="card-text"><strong>Project:</strong> {{ $task->project->name ?? '-' }}</p>
             <p class="card-text"><strong>Status:</strong>
                 @if($task->status)
                     <span class="badge bg-success">Completed</span>
