@@ -23,8 +23,12 @@ class TaskController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        $projects = Project::all();
+        // $categories = Category::all();
+        // $projects = Project::all();
+
+        $categories = Category::where('user_id', auth()->id())->get();
+        $projects = Project::where('user_id', auth()->id())->get();
+        
         return view('task.create', compact('categories', 'projects'));
     }
 

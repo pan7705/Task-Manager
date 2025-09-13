@@ -9,7 +9,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        // $categories = Category::all();
+        $categories = Category::where('user_id', auth()->id())->get();
         return view('category.index', compact('categories'));
     }
 
@@ -26,6 +27,7 @@ class CategoryController extends Controller
 
         Category::create([
             'name' => $request->name,
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('category.index')->with('success', 'Category created successfully.');
@@ -49,6 +51,7 @@ class CategoryController extends Controller
 
         $category->update([
             'name' => $request->name,
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('category.index')->with('success', 'Category updated successfully.');

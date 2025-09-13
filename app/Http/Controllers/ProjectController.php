@@ -9,7 +9,8 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::all();
+        // $projects = Project::all();
+        $projects = Project::where('user_id', auth()->id())->get();
         return view('project.index', compact('projects'));
     }
 
@@ -30,6 +31,7 @@ class ProjectController extends Controller
         Project::create([
             "name" => $request->name,
             "description" => $request->description,
+            "user_id" => auth()->id(),
         ]);
 
         return redirect()->route('project.index')->with('success', 'Project created successfully.');
