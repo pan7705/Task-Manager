@@ -45,8 +45,12 @@ class Task extends Model
                 $query2->orWhere('description', 'like', "%{$search}%");
                 $query2->orWhere('due_date', 'like', "%{$search}%");
                 $query2->orWhere('status', 'like', "%{$search}%");
-                $query2->orWhere('category_id', 'like', "%{$search}%");
-                $query2->orWhere('project_id', 'like', "%{$search}%");
+                $query2->orWhereHas('category', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                });
+                $query2->orWhereHas('project', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                });
             }
         });
     }
