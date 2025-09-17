@@ -16,6 +16,13 @@
         <a href="{{ route('task.create') }}" class="btn btn-primary">+ Add New Task</a>
         <a href="{{ route('category.index') }}" class="btn btn-secondary">Manage Categories</a>
         <a href="{{ route('project.index') }}" class="btn btn-secondary">Manage Projects</a>
+        <form action="{{ route('task.index') }}" method="GET" class="ms-auto d-flex" style="max-width: 300px;">
+            <input type="text" name="search" class="form-control" placeholder="Search tasks..." value="{{ request()->search }}">
+            <button type="submit" class="btn btn-outline-secondary ms-2">Search</button>
+            @if (request()->has('search') && request()->search != '')
+                <a href="{{ route('task.index') }}" class="btn btn-outline-danger ms-2">Clear</a>
+            @endif
+        </form>
     </div>
 
     <div class="card shadow-sm">

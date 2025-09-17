@@ -9,13 +9,16 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Ambik semua data dari table Task (ni kalau system cuma ada 1 user je)
         // $tasks = Task::all();
 
         // ni kalau system ada multiple user
         $tasks = auth()->user()->tasks;
+
+        $search = $request->search ?? null;
+        $tasks = Task::search($search)->latest()->paginate(10);
 
         //Hantar data ke view
         return view('task.index', compact('tasks'));
