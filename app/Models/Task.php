@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Project;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
@@ -34,5 +35,23 @@ class Task extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeSearch($query, $search = null)
+    {
+        $query->when($search, function ($query2) use ($search) {
+            if($search){
+                $query2->where('title', 'like', "%{$search}%");
+                $query2->orWhere('description', 'like', "%{$search}%");
+                $query2->orWhere('due_date', 'like', "%{$search}%");
+                $query2->orWhere('status', 'like', "%{$search}%");
+                $query2->orWhereHas('category', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                });
+                $query2->orWhereHas('project', function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                });
+            }
+        });
     }
 }
