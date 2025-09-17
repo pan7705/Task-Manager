@@ -29,7 +29,6 @@ class RoleHasPermissionSeeder extends Seeder
         $adminRole->syncPermissions($permissions);
 
         //User Biasa
-
         $user = User::firstOrCreate(
             ['email' => 'user@gmail.com'],
             [
